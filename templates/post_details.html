@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ post.titulo }} - Mini Blog</title>
+</head>
+<body>
+    <h1>{{ post.titulo }}</h1>
+    <p><em>Publicado por {{ post.autor.nombre_usuario }} el {{ post.fecha_creacion.strftime('%Y-%m-%d') }}</em></p>
+    <p><strong>Categoría:</strong> {{ post.categoria.nombre }}</p>
+    <div>
+        {{ post.contenido }}
+    </div>
+    <hr>
+    <h2>Comentarios</h2>
+    <ul>
+    {% for comentario in comentarios %}
+        <li>
+            <p>{{ comentario.texto }}</p>
+            <p><em>Por {{ comentario.autor.nombre_usuario }} el {{ comentario.fecha_creacion.strftime('%Y-%m-%d %H:%M') }}</em></p>
+        </li>
+    {% else %}
+        <li>No hay comentarios aún.</li>
+    {% endfor %}
+    </ul>
+    <a href="/">Volver a la lista</a>
+</body>
+</html>
+
+{% extends 'layout.html' %}
+
+{% block body %}
+
+{% endblock %}

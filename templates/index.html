@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block title %} Mini Blog {% endblock %}
+
+{% block body%}
+    <h1>Lista de Posts</h1>
+    <ul>
+    {% for post in posts %}
+        <li>
+            <a href="/post/{{ post.id }}">{{ post.titulo }}</a>
+            <small>{{ post.fecha_creacion.strftime('%Y-%m-%d') }}</small>
+        </li>
+    {% else %}
+        <li>No hay posts para mostrar.</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
