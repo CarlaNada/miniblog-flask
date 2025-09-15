@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+{% block title %} Mini Blog {% endblock %}
+
+{% block body %} 
+<div class="row">
+    <div class="col-12">
+        <h3 class="text-center">
+            Nueva publicacion
+        </h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <form method="post" action="/post_nuevo">
+            <label for="usuario">Usuario</label>
+            <select name="usuario_id" placeholder="Carla" required>
+                {% for user in usuarios %}
+                    <option value="{{ user.id }}"> {{user.nombre}} </option>
+                {% endfor %}
+            </select>
+            <hr>
+            <label for="titulo">Titulo</label>
+            <input type="text" name="password" placeholder="El precio del dolar" required>
+            <label for="categoria">Categoria</label>
+            <select name="categoria_id" placeholder="Economia" required>
+                {% for categoria in categorias %}
+                    <option value="{{ categoria.id }}"> {{categoria.nombre}} </option>
+                {% endfor %}
+            </select>
+            <hr>
+            <label for="contenido">Contenido</label>
+            <textarea name="contenido" placeholder="blablabla" required></textarea>
+            <hr>
+            <label for="fecha">Fecha</label>
+            <input type="date" name="fecha" default=datetime.utcnow required>
+            <button class="btn btn-success mt-4" type="submit">
+                Agregar publicacion
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
