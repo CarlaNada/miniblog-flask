@@ -10,7 +10,7 @@ El objetivo es crear una aplicación web simple que permita manejar publicacione
 - Flask-Migrate
 - MySQL
 
-## Estructura del proyecto
+# Estructura del proyecto
 miniblog/
 │── app.py # Punto de entrada de la aplicación
 │── models.py # Modelos de la base de datos
@@ -20,10 +20,10 @@ miniblog/
 │── environment/ # (ignorado por Git, entorno virtual local)
 │── pycache/ # (ignorado por Git, archivos temporales)
 
-## Instalación y configuración
+# Instalación y configuración
 1. Clonar el repositorio
-     git clone git@github.com:CarlaNada/miniblog-flask.git
-     cd miniblog-flask
+    git clone git@github.com:CarlaNada/miniblog-flask.git
+    cd miniblog-flask
 
 2. Crear y activar entorno virtual (opcional pero recomendado)
     python3 -m venv venv
@@ -38,11 +38,11 @@ miniblog/
     flask db upgrade
 
 5. Ejecutar la app
-     flask run
-     Navegador: http://127.0.0.1:5000
+    flask run
+    Navegador: http://127.0.0.1:5000
 
 
-## Funcionalidades
+# Funcionalidades
 - Registro y gestión de usuarios.
 - Creación, edición y eliminación de posts.
 - Plantillas HTML con Jinja2.
