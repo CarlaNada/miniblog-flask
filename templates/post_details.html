@@ -12,7 +12,7 @@
     <hr>
     <h2>Comentarios</h2>
     <ul>
-    {% for comentario in comentarios %}
+    {% for comentario in post.comentarios %}
         <li>
             <p>{{ comentario.texto }}</p>
             <p><em>Por {{ comentario.autor.nombre_usuario }} el {{ comentario.fecha_creacion.strftime('%Y-%m-%d %H:%M') }}</em></p>
@@ -21,5 +21,19 @@
         <li>No hay comentarios aún.</li>
     {% endfor %}
     </ul>
+
+    <h3>Agregar nuevo comentario</h3>
+    <form method="post" action="">
+        <label for="usuario_id">Usuario:</label>
+        <select name="usuario_id" required>
+            {% for user in usuarios %}
+                <option value="{{ user.id }}"> {{user.nombre_usuario}} </option>
+            {% endfor %}
+        </select>
+        <textarea name="texto" placeholder="Escriba aqui su comentario..."></textarea>
+
+        <button type="submit">Comentar</button>
+    </form>
+
     <a href="/">Volver a la lista</a>
 {% endblock %}

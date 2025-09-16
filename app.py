@@ -15,9 +15,9 @@ from models import Usuario, Categoria, Comentario, Post
 
 @app.route("/")
 def index():
-    #renderizar los post por el orden que desee
+    posts = Post.query.order_by(Post.fecha_creacion.desc()).all()
     return render_template(
-        "index.html"
+        "index.html", posts=posts
     )
 
 @app.route("/usuario_nuevo", methods=['POST', 'GET'])
@@ -27,7 +27,7 @@ def usuario_nuevo():
         password = request.form["password"]
         email = request.form["email"]
 
-        nuevo_usuario = Usuario(usuario=usuario, email=email, password=password)
+        nuevo_usuario = Usuario(nombre_usuario=usuario, email=email, password=password)
         db.session.add(nuevo_usuario)
         db.session.commit()
         return redirect(url_for("index"))
@@ -46,9 +46,8 @@ def post_nuevo():
         titulo = request.form["titulo"]
         categoria_id = request.form["categoria_id"]
         contenido = request.form["contenido"]
-        fecha = request.form["fecha"]
         
-        nuevo_post = Post(titulo=titulo, contenido=contenido, fecha=fecha, usuario_id=int(usuario_id), categoria_id=int(categoria_id))
+        nuevo_post = Post(titulo=titulo, contenido=contenido, usuario_id=int(usuario_id), categoria_id=int(categoria_id))
         db.session.add(nuevo_post)
         db.session.commit()
         return redirect(url_for("index"))
@@ -56,13 +55,19 @@ def post_nuevo():
         "post_nuevo.html", usuarios=usuarios, categorias=categorias
     )
 
-app.route('/post/<int:post_id>', methods=['POST', 'GET'])
+@app.route('/post/<int:post_id>', methods=['POST', 'GET'])
 def post_detail(post_id):
     post = Post.query.get_or_404(post_id)
-    
-
-
-    return render_template('post_details.html', post=post)
+    if request.method == "POST":
+        texto = request.form["texto"]
+        usuario_id = request.form["usuario_id"]
+        
+        nuevo_comentario = Comentario(texto=texto, usuario_id=int(usuario_id), post_id=post.id)
+        db.session.add(nuevo_comentario)
+        db.session.commit()
+        return redirect(url_for("post_detail", post_id=post.id))
+    usuarios = Usuario.query.all()
+    return render_template('post_details.html', post=post, usuarios=usuarios)
 
 if __name__ == "__main__":
     app.run(debug=True)

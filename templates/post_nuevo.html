@@ -16,7 +16,7 @@
             <label for="usuario">Usuario</label>
             <select name="usuario_id" placeholder="Carla" required>
                 {% for user in usuarios %}
-                    <option value="{{ user.id }}"> {{user.nombre}} </option>
+                    <option value="{{ user.id }}"> {{user.nombre_usuario}} </option>
                 {% endfor %}
             </select>
             <hr>
@@ -32,8 +32,6 @@
             <label for="contenido">Contenido</label>
             <textarea name="contenido" placeholder="blablabla" required></textarea>
             <hr>
-            <label for="fecha">Fecha</label>
-            <input type="date" name="fecha" default=datetime.utcnow required>
             <button class="btn btn-success mt-4" type="submit">
                 Agregar publicacion
             </button>

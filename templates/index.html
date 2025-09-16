@@ -7,14 +7,13 @@
     <ul>
     {% for post in posts %}
         <li>
-            <a href="/post/{{ post.id }}">{{ post.titulo }}</a>
+            {{ post.titulo }}
             <small>{{ post.fecha_creacion.strftime('%Y-%m-%d') }}</small>
+
+            <a href="{{ url_for('post_detail', post_id=post.id) }}">Ver detalles</a>
         </li>
     {% else %}
         <li>No hay posts para mostrar.</li>
     {% endfor %}
-
-    <!--AGREGAR BTON PARA VER DETALLE-->
-
     </ul>
 {% endblock %}
