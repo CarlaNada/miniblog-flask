@@ -44,6 +44,6 @@ miniblog/
 
 # Funcionalidades
 - Registro y gestión de usuarios.
-- Creación, edición y eliminación de posts.
+- Creación de posts y comentarios.
 - Plantillas HTML con Jinja2.
 - Migraciones de base de datos con Flask-Migrate.
