@@ -39,7 +39,6 @@ def usuario_nuevo():
 @app.route("/post_nuevo", methods=['POST', 'GET'])
 def post_nuevo():
     usuarios = Usuario.query.all()
-    categorias = Categoria.query.all()
 
     if request.method == "POST":
         usuario_id = request.form["usuario_id"]
@@ -51,9 +50,15 @@ def post_nuevo():
         db.session.add(nuevo_post)
         db.session.commit()
         return redirect(url_for("index"))
+    
     return render_template(
-        "post_nuevo.html", usuarios=usuarios, categorias=categorias
+        "post_nuevo.html", usuarios=usuarios
     )
+
+@app.context_processor
+def inject_categories():
+    categorias = Categoria.query.all()
+    return dict(categorias=categorias)
 
 @app.route('/post/<int:post_id>', methods=['POST', 'GET'])
 def post_detail(post_id):
@@ -66,6 +71,7 @@ def post_detail(post_id):
         db.session.add(nuevo_comentario)
         db.session.commit()
         return redirect(url_for("post_detail", post_id=post.id))
+    
     usuarios = Usuario.query.all()
     return render_template('post_details.html', post=post, usuarios=usuarios)
 
