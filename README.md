@@ -12,13 +12,13 @@ El objetivo es crear una aplicación web simple que permita manejar publicacione
 
 # Estructura del proyecto
 miniblog/
-│── app.py # Punto de entrada de la aplicación
-│── models.py # Modelos de la base de datos
-│── requirements.txt # Dependencias del proyecto
-│── migrations/ # Migraciones de la base de datos
-│── templates/ # Archivos HTML
-│── environment/ # (ignorado por Git, entorno virtual local)
-│── pycache/ # (ignorado por Git, archivos temporales)
+│── app.py
+│── models.py
+│── requirements.txt
+│── migrations/
+│── templates/
+│── environment/
+│── pycache/
 
 # Instalación y configuración
 1. Clonar el repositorio
@@ -44,6 +44,6 @@ miniblog/
 
 # Funcionalidades
 - Registro y gestión de usuarios.
-- Creación, edición y eliminación de posts.
+- Creación de posts y comentarios.
 - Plantillas HTML con Jinja2.
 - Migraciones de base de datos con Flask-Migrate.
