@@ -3,17 +3,19 @@
 {% block title %} Mini Blog {% endblock %}
 
 {% block body%}
-    <h1>Lista de Posts</h1>
-    <ul>
-    {% for post in posts %}
-        <li>
-            {{ post.titulo }}
-            <small>{{ post.fecha_creacion.strftime('%Y-%m-%d') }}</small>
+    <h1 class="text-white">Lista de Posts</h1>
+        <section class="container-fluid">
+            <ul>
+            {% for post in posts %}
+                <li>
+                    {{ post.titulo }}
+                    <small>{{ post.fecha_creacion.strftime('%Y-%m-%d') }}</small>
 
-            <a href="{{ url_for('post_detail', post_id=post.id) }}">Ver detalles</a>
-        </li>
-    {% else %}
-        <li>No hay posts para mostrar.</li>
-    {% endfor %}
-    </ul>
+                    <a href="{{ url_for('post_detail', post_id=post.id) }}">Ver detalles</a>
+                </li>
+            {% else %}
+                <li>No hay posts para mostrar.</li>
+            {% endfor %}
+            </ul>
+        </section>
 {% endblock %}
