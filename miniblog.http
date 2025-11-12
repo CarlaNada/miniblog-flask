@@ -1,0 +1,145 @@
+Ejemplos de requests para cada endpoint
+
+1. AUTENTICACIÓN Y REGISTRO
+-------------------------------------------------------------
+Registro de nuevo usuario (User por defecto)
+    POST /api/register
+    {
+    "nombre_usuario": "Carla2",
+    "email": "meolvidelacontra@google.com",
+    "password": "carla123"
+    }
+
+    {
+    "nombre_usuario": "Moderador",
+    "email": "modera@elmoderador.com",
+    "password": "lamather",
+    "role": "moderator"
+    }
+
+    {
+    "nombre_usuario": "EL Admin",
+    "email": "admin@admin.com",
+    "password": "soyeladmin",
+    "role": "admin"
+    }
+
+Login 
+    POST LOGIN - /api/login
+    -User
+    {
+    "email": "meolvidelacontra@google.com",
+    "password": "carla123"
+    }
+    -Admin
+    {
+    "nombre_usuario": "EL Admin",
+    "email": "admin@admin.com",
+    }
+    -Moderador
+    {
+    "nombre_usuario": "Moderador",
+    "email": "modera@elmoderador.com",
+    }
+
+Caso de Error: Login con credenciales inválidas
+
+    POST LOGIN - /api/login
+
+    {
+    "email": "user@test.com",
+    "password": "password-erronea"
+    }
+
+
+2. CATEGORÍAS (REQUIERE ADMIN/MODERATOR)
+-------------------------------------------------------------
+Crear Categoría (Requiere ADMIN/MODERATOR)
+    POST /api/categories
+    Authorization: Bearer {{token}}
+    {"nombre": "Tecnología"}
+
+Listar Categorías (Público)
+    GET categories  http://localhost:5000/api/categories
+
+
+3. POSTS
+-------------------------------------------------------------
+Crear Post (Requiere Autenticación)
+    POST POSTS - http://localhost:5000/api/posts
+    {
+    "titulo": "Probando post de la API",
+    "contenido": "Contenido del primer posteo hecho desde TC.",
+    "categoria_id": 2
+    }
+
+Listar Todos los Posts (Público)
+    GET POSTS id - http://localhost:5000/api/posts/
+
+Obtener Post Específico (Público)
+    GET POSTS id - http://localhost:5000/api/posts/2
+
+Editar Post (Requiere Autor o Admin)
+Authorization: Bearer {{token}}
+    PUT POSTS id - http://localhost:5000/api/posts/2
+    {
+    "titulo": "Título PUT actualizado",
+    "contenido": "Contenido modificado y verificado."
+    }
+
+Caso de Error: Eliminar Post Sin Token
+    DELETE POSTS id - http://localhost:5000/api/posts/2
+    No se envía token: debe dar 401 Unauthorized
+
+
+4. COMENTARIOS
+-------------------------------------------------------------
+Crear Comentario en Post ID 2 (Requiere Autenticación)
+    POST id COMMENTS - http://localhost:5000/api/posts/1/comments
+    Authorization: Bearer {{token}}
+    {
+    "texto": "Probando comentario desde TC"
+    }
+
+Listar Comentarios de Post ID 1 (Público)
+    GET POST id COMMENTS - http://localhost:5000/api/posts/1/comments
+
+Eliminar Comentario (Requiere Autor, Moderator o Admin)
+    DELETE COMMENTS id - http://localhost:5000/api/comments/1
+    Authorization: Bearer {{token}}
+
+
+5. ADMIN/USUARIOS (REQUIERE ADMIN)
+-------------------------------------------------------------
+Listar Usuarios (Requiere ADMIN)
+    GET /api/users
+    Authorization: Bearer {{token}}
+Token del Admin para esto
+
+Cambiar Rol de Usuario (Requiere ADMIN)
+
+Intenta cambiar el rol de Carla2 (ID 9) a 'moderator'
+    PATCH /api/users/9
+    Authorization: Bearer {{token}}
+
+    {
+    "role": "moderator"
+    }
+
+Caso de Error: Intento de Listar Usuarios Sin Permiso
+    GET /api/users
+    Authorization: Bearer {{token}}
+
+    Debe dar 403 Forbidden
+
+
+6. STATS (REQUIERE ADMIN O MODERATOR)
+-------------------------------------------------------------
+Listar total post, total comentarios, total usuarios
+    GET /api/stats
+    Authorization: Bearer {{token}}
+
+Listar post de la ultima semana
+    GET /api/stats
+    Authorization: Bearer {{token}}
+    Solo Admin
