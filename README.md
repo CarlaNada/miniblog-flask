@@ -28,6 +28,7 @@ miniblog/
 
 4. Configurar la base de datos
     flask db init
+    (para ejecutar cada migracion)
     flask db migrate -m "Inicial"
     flask db upgrade
 
